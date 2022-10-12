@@ -24,7 +24,7 @@ jobs:
       - name: Run a one-line script
         run: echo This is my first stage!
 
-  StageOne:
+  Test:
     # This stage is dependant of my 'build' job.
     needs: build
     runs-on: ubuntu-latest
@@ -34,10 +34,10 @@ jobs:
       - name: Run a one-line script
         run: echo Wow, this is my second stage!
 
-  StageTwo:
+  Prod:
     # This can't run unless 'build' AND 'StageOne' have completed.
     # In this case we should only depend on StageOne as it is already dependant of build.
-    needs: [build, StageOne]
+    needs: [build, Test]
     # In this setup, I don't dare to go to 'StageTwo' unless Ramtin has approved.
     # So I've created an environment called 'ramtinNeedsToApprove'
     # You can find it at Settings/Environment (note: some prerequisites)
